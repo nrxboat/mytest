@@ -1,4 +1,4 @@
-FROM devisty/xssh:v2
+FROM debian
 EXPOSE 80
 
 CMD ["apt update && apt upgrade -y"]
