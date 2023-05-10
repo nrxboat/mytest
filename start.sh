@@ -2,7 +2,7 @@
 source /app/config.sh
 
 service ssh start
-service nginx start
+service apache start
 
 echo "set ngrok token: $NGROK_TOKEN"
 ngrok authtoken $NGROK_TOKEN
