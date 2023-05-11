@@ -12,5 +12,5 @@ RUN cp /app/alist.conf /etc/apache2/sites-enabled/
 RUN cp /app/filebrowser.conf /etc/apache2/sites-enabled/
 RUN chmod +x /app/1st.sh
 RUN chmod +x /app/start.sh
-RUN /app/1st.sh
+CMD ["/app/1st.sh"]
 CMD ["/app/start.sh"]

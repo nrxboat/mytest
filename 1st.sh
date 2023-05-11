@@ -11,6 +11,7 @@ filebrowser -d /root/data/filebrowser.db users add root password --perm.admin
 
 a2enmod proxy proxy_http proxy_balancer lbmethod_byrequests rewrite
 
+
 wget https://github.com/alist-org/alist/releases/download/v3.16.3/alist-linux-amd64.tar.gz
 tar -zxvf alist-*-*.tar.gz /root/data
 chmod +x /root/data/alist
