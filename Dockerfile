@@ -1,12 +1,11 @@
 FROM debian:latest
 EXPOSE 80
 
-RUN apt update && apt install -y openssh-server curl wget unzip sudo apache2 screen fuse3
+RUN apt update && apt install -y openssh-server curl wget unzip sudo apache2 screen tar
 RUN echo "PermitRootLogin Yes" >> /etc/ssh/sshd_config
 RUN echo "root:password" | chpasswd
 RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
 
-RUN curl https://rclone.org/install.sh | bash
 RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 
 RUN filebrowser -d /root/data//filebrowser.db config init
@@ -17,11 +16,12 @@ RUN filebrowser -d /root/data/filebrowser.db config set --log /var/log/filebrows
 RUN filebrowser -d /root/data/filebrowser.db users add root password --perm.admin
 CMD ["nohup filebrowser -d /root/filebrowser.db >/dev/null 2>&1 &"]
 
-CMD ["rm ./.config/rclone/rclone.conf"]
-CMD ["wget https://al.isriro.icu/d/OnedriveNL/rclone.conf?sign=CAdsjRYpcJlCRCxEd3TEdXb1xn2Pofhq6iqg8XpysUY=:0"]
-CMD ["mv rclone.* ./.config/rclone/rclone.conf"]
-CMD ["mkdir /root/onedrive1"]
-CMD ["rclone mount onedrive:/ /root/onedrive1 --copy-links --no-gzip-encoding --no-check-certificate --allow-other --allow-non-empty --vfs-cache-mode writes"]
+RUN a2enmod proxy proxy_http proxy_balancer lbmethod_byrequests rewrite
+
+CMD ["wget https://github.com/alist-org/alist/releases/download/v3.16.3/alist-linux-amd64.tar.gz"]
+CMD ["tar -zxvf alist-*-*.tar.gz /root/data"]
+CMD ["chmod +x /root/data/alist"]
+CMD ["/root/data/alist start"]
 
 COPY . /app
 RUN chmod +x /app/start.sh
