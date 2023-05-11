@@ -4,9 +4,9 @@ services:
     build: .
     ports:
       - "80:80"
-    volumes:
-      - /root/data
-      cap_add:
-      -  SYS_ADMIN
-      device:
-      -  /dev/fuse
+  volumes:
+    - /root/data
+  cap_add:
+    -  SYS_ADMIN
+  device:
+    -  /dev/fuse
