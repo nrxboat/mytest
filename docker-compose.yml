@@ -7,6 +7,6 @@ services:
     volumes:
       - /root/data
       cap_add:
-        SYS_ADMIN
+      -  SYS_ADMIN
       device:
-        /dev/fuse
+      -  /dev/fuse
