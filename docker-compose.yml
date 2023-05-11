@@ -8,6 +8,6 @@ services:
       -  SYS_ADMIN
     device:
       -  /dev/fuse
-  volumes:
+    volumes:
     - /root/data
   
