@@ -14,14 +14,12 @@ RUN filebrowser -d /root/data//filebrowser.db config set --port 8088
 RUN filebrowser -d /root/data/filebrowser.db config set --locale zh-cn
 RUN filebrowser -d /root/data/filebrowser.db config set --log /var/log/filebrowser.log
 RUN filebrowser -d /root/data/filebrowser.db users add root password --perm.admin
-CMD ["nohup filebrowser -d /root/filebrowser.db >/dev/null 2>&1 &"]
 
 RUN a2enmod proxy proxy_http proxy_balancer lbmethod_byrequests rewrite
 
-CMD ["wget https://github.com/alist-org/alist/releases/download/v3.16.3/alist-linux-amd64.tar.gz"]
-CMD ["tar -zxvf alist-*-*.tar.gz /root/data"]
-CMD ["chmod +x /root/data/alist"]
-CMD ["/root/data/alist start"]
+RUN wget https://github.com/alist-org/alist/releases/download/v3.16.3/alist-linux-amd64.tar.gz
+RUN tar -zxvf alist-*-*.tar.gz /root/data
+RUN chmod +x /root/data
 
 COPY . /app
 RUN chmod +x /app/start.sh
