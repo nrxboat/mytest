@@ -2,6 +2,8 @@
 source /app/config.sh
 
 cp /app/alist.conf /etc/apache2/sites-enabled/
+cp /app/filebrowser.conf /etc/apache2/sites-enabled/
+
 service ssh start
 service apache2 start
 
