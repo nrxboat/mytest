@@ -1,10 +1,9 @@
 #!/bin/bash
 source /app/config.sh
 
-cp /app/alist.conf /etc/apache2/sites-enabled/
-cp /app/filebrowser.conf /etc/apache2/sites-enabled/
 
-nohup filebrowser -d /root/filebrowser.db >/dev/null 2>&1 &
+
+nohup filebrowser -d /root/data/filebrowser.db >/dev/null 2>&1 &
 
 cd /root/data
 ./alist start
