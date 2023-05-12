@@ -1,10 +1,6 @@
 #!/bin/bash
 source /app/config.sh
-wget https://github.com/alist-org/alist/releases/download/v3.16.3/alist-linux-amd64.tar.gz
-tar -zxvf alist-linux-amd64.tar.gz 
-cd /root/data
-cp /root/alist /root/data -n
-chmod +x alist
+
 
 
 filebrowser -d /root/data/filebrowser.db config init
@@ -15,6 +11,7 @@ filebrowser -d /root/data/filebrowser.db config set --log /var/log/filebrowser.l
 filebrowser -d /root/data/filebrowser.db users add root password --perm.admin
 
 a2enmod proxy proxy_http proxy_balancer lbmethod_byrequests rewrite
+service apache2 restart
 
 cp /app/alist.conf /etc/apache2/sites-enabled/ -n
 cp /app/filebrowser.conf /etc/apache2/sites-enabled/ -n
@@ -22,10 +19,10 @@ cp /app/filebrowser.conf /etc/apache2/sites-enabled/ -n
 
 nohup filebrowser -d /root/data/filebrowser.db >/dev/null 2>&1 &
 
-./alist start
+alist start
 
 service ssh start
-service apache2 start
+service apache2 restartstart
 
 echo "set ngrok token: $NGROK_TOKEN"
 ngrok authtoken $NGROK_TOKEN
