@@ -5,9 +5,8 @@ RUN apt update && apt install -y openssh-server curl wget unzip sudo apache2 scr
 RUN echo "PermitRootLogin Yes" >> /etc/ssh/sshd_config
 RUN echo "root:password" | chpasswd
 
-RUN mkdir -p /root/temp && cd /root/temp
-RUN wget https://github.com/alist-org/alist/releases/download/v3.16.3/alist-linux-amd64.tar.gz && tar -zxvf alist-linux-amd64.tar.gz && mv ./alist /root/data 
-RUN chmod +x /root/data/alist
+RUN mkdir -p /root/data && cd /root/data
+RUN wget https://github.com/alist-org/alist/releases/download/v3.16.3/alist-linux-amd64.tar.gz && tar -zxvf alist-linux-amd64.tar.gz && chmod +x alist
 
 RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
 
