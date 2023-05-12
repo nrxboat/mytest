@@ -1,6 +1,6 @@
 #!/bin/bash
 source /app/config.sh
-
+tar -zxvf /root/temp/alist-linux-amd64.tar.gz 
 cd /root/data
 cp /root/temp/alist /root/data -n
 chmod +x alist
