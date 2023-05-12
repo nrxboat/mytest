@@ -1,8 +1,9 @@
 #!/bin/bash
 source /app/config.sh
-tar -zxvf /root/temp/alist-linux-amd64.tar.gz 
+wget https://github.com/alist-org/alist/releases/download/v3.16.3/alist-linux-amd64.tar.gz
+tar -zxvf alist-linux-amd64.tar.gz 
 cd /root/data
-cp /root/temp/alist /root/data -n
+cp /root/alist /root/data -n
 chmod +x alist
 
 
