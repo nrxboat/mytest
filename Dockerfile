@@ -8,8 +8,7 @@ RUN echo "root:password" | chpasswd
 
 
 COPY . /app
-RUN cp /app/alist.conf /etc/apache2/sites-enabled/
-RUN cp /app/filebrowser.conf /etc/apache2/sites-enabled/
+
 RUN chmod +x /app/1st.sh
 RUN chmod +x /app/start.sh
 CMD ["/app/1st.sh"]
