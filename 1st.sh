@@ -1,6 +1,4 @@
-curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
 
-curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 
 filebrowser -d /root/data//filebrowser.db config init
 filebrowser -d /root/data/filebrowser.db config set --address 0.0.0.0
@@ -14,6 +12,7 @@ a2enmod proxy proxy_http proxy_balancer lbmethod_byrequests rewrite
 cp /app/alist.conf /etc/apache2/sites-enabled/
 cp /app/filebrowser.conf /etc/apache2/sites-enabled/
 
-wget https://github.com/alist-org/alist/releases/download/v3.16.3/alist-linux-amd64.tar.gz
-tar -zxvf alist-linux-amd64.tar.gz /root/data
-chmod +x /root/data/alist
+wget https://github.com/alist-org/alist/releases/download/v3.16.3/alist-linux-amd64.tar.gz -P /root/data
+cd /root/data
+tar -zxvf alist-linux-amd64.tar.gz 
+chmod +x ./alist
